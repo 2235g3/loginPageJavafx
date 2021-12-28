@@ -6,7 +6,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.application.Application;
 
-import java.io.IOException;
 
 public class mainApp extends Application {
     @Override

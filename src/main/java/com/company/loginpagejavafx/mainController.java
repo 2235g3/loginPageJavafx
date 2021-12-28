@@ -95,6 +95,11 @@ public class mainController {
             if (loginCorrect) {
                 successPage(event);
             }
+            else {
+                errorText.setText("Username and/or password incorrect!");
+                errorText.setTranslateX(-46.0);
+                errorText.setVisible(true);
+            }
         }
     }
 
@@ -127,41 +132,45 @@ public class mainController {
     }
 
     public void signUpCheck(String[] userLogins, ActionEvent event) {
-        boolean loop = true;
-        while (loop) {
-            boolean signUpCorrect = false;
-            for (int i = 0; i < userLogins.length; i++) {
-                if (userLogins[i].equals(usernameInput.getText())) {
-                    signUpCorrect = true;
-                    break;
-                }
-                i += 1;
+        boolean signUpCorrect = false;
+        for (int i = 0; i < userLogins.length; i++) {
+            if (userLogins[i].equals(usernameInput.getText())) {
+                signUpCorrect = true;
+                break;
             }
-            if (signUpCorrect) {
-                errorText.setText("A user with this username already exists");
+            i += 1;
+        }
+        if (signUpCorrect) {
+            errorText.setText("A user with this username already exists");
+            errorText.setTranslateX(-50.0);
+            errorText.setVisible(true);
+        } else {
+            if (usernameInput.getText().length() < 3) {
+                errorText.setTranslateX(5.0);
+                errorText.setText("Username too short");
                 errorText.setVisible(true);
             } else {
-                if (usernameInput.getText().length() < 3) {
-                    errorText.setText("Username too short");
+                if (passwordInput.getText().length() < 8 && passwordShownInput.getText().length() < 8) {
+                    errorText.setTranslateX(5.0);
+                    errorText.setText("Password too short");
                     errorText.setVisible(true);
                 } else {
-                    if (passwordInput.getText().length() < 8 || passwordShownInput.getText().length() < 8) {
-                        errorText.setText("Password too short");
-                        errorText.setVisible(true);
-                    } else {
-                        loop = false;
-                    }
+                    writeToFile();
+                    backToChoose(event);
                 }
             }
         }
-        writeToFile();
-        backToChoose(event);
     }
 
     public void writeToFile() {
         try {
             FileWriter myWriter = new FileWriter("C:\\Users\\lucky\\Documents\\School\\Reigate College\\\\Computer Science\\Year 12\\Java Programming\\loginPageJavafx\\src\\main\\java\\com\\company\\loginpagejavafx\\userLogins.csv", true);
-            myWriter.write(usernameInput.getText() + "," + passwordInput.getText() + ",");
+            if (passwordShownInput.getText().length() < 8) {
+                myWriter.write(usernameInput.getText() + "," + passwordInput.getText() + ",");
+            }
+            else if (passwordInput.getText().length() < 8) {
+                myWriter.write(usernameInput.getText() + "," + passwordShownInput.getText() + ",");
+            }
             myWriter.close();
         } catch (IOException e) {
             errorText.setText("An error occurred!");
