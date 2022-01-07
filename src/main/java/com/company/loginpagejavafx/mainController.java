@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -26,7 +27,7 @@ public class mainController {
     @FXML
     private Label errorText;
     private ArrayList<String> userDetailsArr = new ArrayList<>();
-    private static File userDetails = new File("C:\\Users\\lucky\\Documents\\School\\Reigate College\\Computer Science\\Year 12\\Java Programming\\loginPageJavafx\\src\\main\\java\\com\\company\\loginpagejavafx\\userLogins.csv");
+    private static File userDetails = new File("X:\\My Documents\\Reigate College\\Year 1\\Computer Science\\javaFX\\loginPageJavafx\\src\\main\\csvFiles\\com.comapny.loginpagejavafx\\userLogins.csv");
     @FXML
     private TextField usernameInput;
     @FXML
@@ -164,7 +165,7 @@ public class mainController {
 
     public void writeToFile() {
         try {
-            FileWriter myWriter = new FileWriter("C:\\Users\\lucky\\Documents\\School\\Reigate College\\\\Computer Science\\Year 12\\Java Programming\\loginPageJavafx\\src\\main\\java\\com\\company\\loginpagejavafx\\userLogins.csv", true);
+            FileWriter myWriter = new FileWriter("X:\\My Documents\\Reigate College\\Year 1\\Computer Science\\javaFX\\loginPageJavafx\\src\\main\\csvFiles\\com.comapny.loginpagejavafx\\userLogins.csv", true);
             if (passwordShownInput.getText().length() < 8) {
                 myWriter.write(usernameInput.getText() + "," + passwordInput.getText() + ",");
             }
