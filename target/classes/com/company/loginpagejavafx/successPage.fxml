@@ -19,8 +19,8 @@
                     <Button layoutX="515.0" layoutY="14.0" mnemonicParsing="false" onAction="#signOut" prefHeight="17.0" prefWidth="71.0" text="Sign Out" />
                     <TableView fx:id="bookTable" layoutY="96.0" prefHeight="300.0" prefWidth="600.0">
                     </TableView>
-               <Label layoutX="465.0" layoutY="44.0" text="Filter:" />
-               <ChoiceBox fx:id="filterChoice" layoutX="463.0" layoutY="65.0" prefHeight="25.0" prefWidth="127.0"/>
+                    <Label layoutX="465.0" layoutY="44.0" text="Filter:" />
+                    <ChoiceBox fx:id="filterChoice" layoutX="463.0" layoutY="65.0" prefHeight="25.0" prefWidth="127.0" />
                 </AnchorPane>
             </content>
         </Tab>
@@ -50,7 +50,16 @@
         </Tab>
         <Tab closable="false" text="Edit Books">
             <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <Button layoutX="522.0" layoutY="14.0" mnemonicParsing="false" onAction="#signOut" text="Sign Out" />
+                        <Label layoutX="198.0" layoutY="23.0" text="Edit a Books Details" underline="true">
+                            <font>
+                                <Font name="System Bold" size="22.0" />
+                            </font>
+                        </Label>
+                        <Label layoutX="91.0" layoutY="72.0" text="Choose an ISBN:" />
+                    </children></AnchorPane>
             </content>
         </Tab>
         <Tab closable="false" text="Delete Book">
