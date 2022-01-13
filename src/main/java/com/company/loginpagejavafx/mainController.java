@@ -8,7 +8,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -27,7 +26,7 @@ public class mainController {
     @FXML
     private Label errorText;
     private ArrayList<String> userDetailsArr = new ArrayList<>();
-    private static File userDetails = new File("X:\\My Documents\\Reigate College\\Year 1\\Computer Science\\javaFX\\loginPageJavafx\\src\\main\\csvFiles\\com.comapny.loginpagejavafx\\userLogins.csv");
+    private static File userDetails = new File(System.getProperty("user.dir") + "\\src\\main\\csvFiles\\com.comapny.loginpagejavafx\\userLogins.csv");
     @FXML
     private TextField usernameInput;
     @FXML
@@ -95,8 +94,7 @@ public class mainController {
             }
             if (loginCorrect) {
                 successPage(event);
-            }
-            else {
+            } else {
                 errorText.setText("Username and/or password incorrect!");
                 errorText.setTranslateX(-46.0);
                 errorText.setVisible(true);
@@ -156,26 +154,50 @@ public class mainController {
                     errorText.setText("Password too short");
                     errorText.setVisible(true);
                 } else {
-                    writeToFile();
+                    writeToFile("\\src\\main\\csvFiles\\com.comapny.loginpagejavafx\\userLogins.csv", "users", new ArrayList<>(), true, passwordShownInput, passwordInput, usernameInput, errorText, new Label());
                     backToChoose(event);
                 }
             }
         }
     }
 
-    public void writeToFile() {
+    public static void writeToFile(String fileSource, String fileToEdit, ArrayList<String> bookDetails, boolean append, TextField passwordShownInput, PasswordField passwordInput, TextField usernameInput, Label errorText, Label errorLabel) {
         try {
-            FileWriter myWriter = new FileWriter("X:\\My Documents\\Reigate College\\Year 1\\Computer Science\\javaFX\\loginPageJavafx\\src\\main\\csvFiles\\com.comapny.loginpagejavafx\\userLogins.csv", true);
-            if (passwordShownInput.getText().length() < 8) {
-                myWriter.write(usernameInput.getText() + "," + passwordInput.getText() + ",");
+            FileWriter myWriter = new FileWriter(System.getProperty("user.dir") + fileSource, append);
+            if (fileToEdit.equals("users")) {
+                addUserDetails(myWriter, passwordShownInput, passwordInput, usernameInput, errorText);
+            } else if (fileToEdit.equals("books")) {
+                bookWrite(myWriter, bookDetails, errorLabel);
             }
-            else if (passwordInput.getText().length() < 8) {
+        } catch (IOException e) {
+            errorText.setText("An error occurred!");
+            errorText.setVisible(true);
+        }
+    }
+
+    public static void addUserDetails(FileWriter myWriter, TextField passwordShownInput, PasswordField passwordInput, TextField usernameInput, Label errorText) {
+        try {
+            if (passwordShownInput.getText().length() >= 8) {
+                myWriter.write(usernameInput.getText() + "," + passwordInput.getText() + ",");
+            } else if (passwordInput.getText().length() >= 8) {
                 myWriter.write(usernameInput.getText() + "," + passwordShownInput.getText() + ",");
             }
             myWriter.close();
         } catch (IOException e) {
             errorText.setText("An error occurred!");
             errorText.setVisible(true);
+        }
+    }
+
+    public static void bookWrite(FileWriter myWriter, ArrayList<String> bookDetails, Label displayError) {
+        try {
+            for (String detail : bookDetails) {
+                myWriter.write(detail + ",");
+            }
+            myWriter.close();
+        } catch (IOException e) {
+            displayError.setText("An error occurred!");
+            displayError.setVisible(true);
         }
     }
 }
