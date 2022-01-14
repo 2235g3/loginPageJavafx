@@ -65,15 +65,15 @@
                             </font>
                         </Label>
                         <Label layoutX="134.0" layoutY="101.0" text="Enter ISBN:" />
-                  <TextField layoutX="200.0" layoutY="97.0" prefHeight="25.0" prefWidth="209.0" promptText="ISBN" />
-                  <TextField layoutX="201.0" layoutY="147.0" prefHeight="25.0" prefWidth="207.0" promptText="Book Name" />
+                  <TextField fx:id="ISBNToEdit" layoutX="200.0" layoutY="97.0" prefHeight="25.0" prefWidth="209.0" promptText="ISBN" />
+                  <TextField fx:id="bookNameToEdit" layoutX="201.0" layoutY="147.0" prefHeight="25.0" prefWidth="207.0" promptText="Book Name" />
                   <Label layoutX="97.0" layoutY="151.0" text="Enter Book Name:" />
                   <Label layoutX="134.0" layoutY="62.0" text="You must enter the ISBN and title of the book you want to edit">
                      <font>
                         <Font size="13.0" />
                      </font>
                   </Label>
-                  <Button layoutX="266.0" layoutY="185.0" mnemonicParsing="false" text="Find Book" />
+                  <Button layoutX="266.0" layoutY="185.0" mnemonicParsing="false" text="Find Book" onAction="#bookToEditCheck"/>
                   <Label fx:id="bookEditCheckLabel" layoutX="97.0" layoutY="348.0" text="Is this the book you wanted to edit?" visible="false" />
                   <Label fx:id="bookNameLabel" layoutX="97.0" layoutY="236.0" text="Book Name:" visible="false" />
                   <Label fx:id="authorLabel" layoutX="97.0" layoutY="264.0" text="Author:" visible="false" />

@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="424.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.loginpagejavafx.libraryController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="424.0" prefWidth="599.0" xmlns="http://javafx.com/javafx/" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.loginpagejavafx.libraryController">
     <tabs>
         <Tab closable="false" text="Book Search">
             <content>
@@ -58,7 +64,32 @@
                                 <Font name="System Bold" size="22.0" />
                             </font>
                         </Label>
-                        <Label layoutX="91.0" layoutY="72.0" text="Choose an ISBN:" />
+                        <Label layoutX="134.0" layoutY="101.0" text="Enter ISBN:" />
+                  <TextField fx:id="ISBNToEdit" layoutX="200.0" layoutY="97.0" prefHeight="25.0" prefWidth="209.0" promptText="ISBN" />
+                  <TextField fx:id="bookNameToEdit" layoutX="201.0" layoutY="147.0" prefHeight="25.0" prefWidth="207.0" promptText="Book Name" />
+                  <Label layoutX="97.0" layoutY="151.0" text="Enter Book Name:" />
+                  <Label layoutX="134.0" layoutY="62.0" text="You must enter the ISBN and title of the book you want to edit">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Button layoutX="266.0" layoutY="185.0" mnemonicParsing="false" text="Find Book" onAction="#bookToEditCheck"/>
+                  <Label fx:id="bookEditCheckLabel" layoutX="97.0" layoutY="348.0" text="Is this the book you wanted to edit?" visible="false" />
+                  <Label fx:id="bookNameLabel" layoutX="97.0" layoutY="236.0" text="Book Name:" visible="false" />
+                  <Label fx:id="authorLabel" layoutX="97.0" layoutY="264.0" text="Author:" visible="false" />
+                  <Label fx:id="ISBNLabel" layoutX="97.0" layoutY="293.0" text="ISBN:" visible="false" />
+                  <Label fx:id="genreLabel" layoutX="98.0" layoutY="320.0" text="Genre:" visible="false" />
+                  <Button fx:id="bookEditYes" layoutX="290.0" layoutY="345.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="29.0" text="Yes" visible="false">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="bookEditNo" layoutX="323.0" layoutY="344.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="25.0" text="No" visible="false">
+                     <font>
+                        <Font size="9.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="editErrorLabel" layoutX="171.0" layoutY="219.0" text="The ISBN and title you entered do not match up!" textFill="RED" visible="false" />
                     </children></AnchorPane>
             </content>
         </Tab>

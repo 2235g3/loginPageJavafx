@@ -6,7 +6,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class logIn {
-    public int count;
+    private int count;
 
     public void showHidePass(PasswordField passwordInput, TextField passwordShownInput) {
         count += 1;

@@ -33,7 +33,6 @@ public class mainController {
     private PasswordField passwordInput;
     @FXML
     private TextField passwordShownInput;
-    public int count;
 
     public void selectNewScene(String fileName, ActionEvent event) {
         try {
