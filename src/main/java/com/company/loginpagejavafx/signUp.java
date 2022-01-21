@@ -10,17 +10,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class signUp {
-    private int count;
-
-    public void showHidePass(PasswordField passwordInput, TextField passwordShownInput) {
-        count += 1;
-        if (count % 2 == 1) {
-            new logIn().passVisibility(passwordInput.getText(), true, false, passwordInput, passwordShownInput);
-        } else {
-            new logIn().passVisibility(passwordShownInput.getText(), false, true, passwordInput, passwordShownInput);
-        }
-    }
-
     public static void addUserDetails(FileWriter myWriter, TextField passwordShownInput, PasswordField passwordInput, TextField usernameInput, Label errorText) {
         try {
             if (passwordShownInput.getText().length() >= 8) {

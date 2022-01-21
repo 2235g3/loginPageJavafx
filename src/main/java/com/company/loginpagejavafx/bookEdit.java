@@ -10,11 +10,11 @@ public class bookEdit {
         boolean bookExists = false;
         int bookIndex = -1;
         if (bookNameToEdit.getText().equals("") || ISBNToEdit.getText().equals("")) {
-            bookAdd.displayError(editErrorLabel, "One or more values are empty", 14.0);
+            bookAdd.displayError(editErrorLabel, "One or more values are empty", 28.0, true);
         }
         else {
             if (!bookAdd.checkDigit(ISBNToEdit.getText())) {
-                bookAdd.displayError(editErrorLabel, "ISBN is incorrect!", 53.0);
+                bookAdd.displayError(editErrorLabel, "ISBN is incorrect!", 53.0, true);
             }
             else {
                 for (int i = 0; i < readableBookDetails.length; i+=4) {
@@ -25,9 +25,10 @@ public class bookEdit {
                     }
                 }
                 if (!bookExists) {
-                    bookAdd.displayError(editErrorLabel, "The ISBN and title you entered do not match up!", 0.0);
+                    bookAdd.displayError(editErrorLabel, "The ISBN and title you entered do not match up!", 0.0, true);
                 }
                 else {
+                    bookAdd.displayError(editErrorLabel, "One or more values are empty", 28.0, false);
                     Node[] invisibleNodes = {bookEditNo, bookEditYes, genreLabel, ISBNLabel, authorLabel, bookNameLabel, bookEditCheckLabel};
                     setEverythingVisible(invisibleNodes, true);
                     displayBookDetails(readableBookDetails, bookIndex, genreLabel, ISBNLabel, authorLabel, bookNameLabel);

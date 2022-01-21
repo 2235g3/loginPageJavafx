@@ -6,21 +6,28 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class logIn {
-    private int count;
 
-    public void showHidePass(PasswordField passwordInput, TextField passwordShownInput) {
-        count += 1;
-        if (count % 2 == 1) {
-            passVisibility(passwordInput.getText(), true, false, passwordInput, passwordShownInput);
+    public boolean showHidePass(PasswordField passwordInput, TextField passwordShownInput, boolean clicked) {
+        clicked = !clicked;
+        if (clicked) {
+            passVisibility(passwordInput.getText(), true, passwordShownInput, passwordInput);
         } else {
-            passVisibility(passwordShownInput.getText(), false, true, passwordInput, passwordShownInput);
+            passVisibility(passwordShownInput.getText(), false, passwordShownInput, passwordInput);
         }
+        return clicked;
     }
 
-    public void passVisibility(String passVal, boolean passShow, boolean passHide, PasswordField passwordInput, TextField passwordShownInput) {
-        passwordShownInput.setText(passVal);
-        passwordShownInput.setVisible(passShow);
-        passwordInput.setVisible(passHide);
+    public void passVisibility(String textVal, boolean passShow, TextField passwordShownInput, PasswordField passwordInput) {
+        if (passShow) {
+            passwordShownInput.setText(textVal);
+            passwordShownInput.setVisible(true);
+            passwordInput.setVisible(false);
+        }
+        else {
+            passwordInput.setText(textVal);
+            passwordInput.setVisible(true);
+            passwordShownInput.setVisible(false);
+        }
     }
 
     //Method to check login details

@@ -33,6 +33,7 @@ public class mainController {
     private PasswordField passwordInput;
     @FXML
     private TextField passwordShownInput;
+    public boolean clicked = false;
 
     public void selectNewScene(String fileName, ActionEvent event) {
         try {
@@ -64,7 +65,7 @@ public class mainController {
 
     //Method to change a password field's visibility
     public void showHidePass(ActionEvent event) {
-        new logIn().showHidePass(passwordInput, passwordShownInput);
+        clicked = new logIn().showHidePass(passwordInput, passwordShownInput, clicked);
     }
 
     //Method to check login details

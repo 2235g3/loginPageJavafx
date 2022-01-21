@@ -6,22 +6,22 @@
 
 <AnchorPane prefHeight="229.0" prefWidth="421.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.loginpagejavafx.mainController">
    <children>
+      <TextField fx:id="usernameInput" layoutX="123.0" layoutY="67.0" prefHeight="25.0" prefWidth="175.0" promptText="Username" />
       <PasswordField fx:id="passwordInput" layoutX="123.0" layoutY="118.0" prefHeight="25.0" prefWidth="175.0" promptText="Password" />
+      <TextField fx:id="passwordShownInput" layoutX="123.0" layoutY="118.0" prefHeight="25.0" prefWidth="175.0" promptText="Password" visible="false" />
+      <CheckBox fx:id="showPassCheck" layoutX="306.0" layoutY="122.0" mnemonicParsing="false" onAction="#showHidePass" text="Show Password" />
+      <Button fx:id="backButton" layoutX="14.0" layoutY="190.0" mnemonicParsing="false" onAction="#backToChoose" text="Back" />
+      <Button fx:id="loginButton" layoutX="179.0" layoutY="165.0" mnemonicParsing="false" onAction="#loginCheck" text="Login" />
       <Label layoutX="35.0" layoutY="120.0" prefHeight="21.0" prefWidth="73.0" text="Password:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <TextField fx:id="usernameInput" layoutX="123.0" layoutY="67.0" prefHeight="25.0" prefWidth="175.0" promptText="Username" />
       <Label layoutX="35.0" layoutY="69.0" text="Username:">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Button fx:id="backButton" layoutX="14.0" layoutY="190.0" mnemonicParsing="false" onAction="#backToChoose" text="Back" />
-      <Button fx:id="loginButton" layoutX="179.0" layoutY="165.0" mnemonicParsing="false" onAction="#loginCheck" text="Login" />
-      <CheckBox fx:id="showPassCheck" layoutX="306.0" layoutY="122.0" mnemonicParsing="false" onAction="#showHidePass" text="Show Password" />
-      <TextField fx:id="passwordShownInput" layoutX="123.0" layoutY="118.0" prefHeight="25.0" prefWidth="175.0" promptText="Password" visible="false" />
       <Label fx:id="errorText" layoutX="150.0" layoutY="194.0" text="An error occurred!" textFill="RED" visible="false" />
    </children>
 </AnchorPane>
