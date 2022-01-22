@@ -1,10 +1,7 @@
 package com.company.loginpagejavafx;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.fxml.FXML;
 
 import java.io.FileNotFoundException;
@@ -29,8 +26,28 @@ public class libraryController {
     private Label errorLabel;
     @FXML
     private ChoiceBox filterChoice;
+    @FXML
+    private Label bookEditCheckLabel;
+    @FXML
+    private Label bookNameLabel;
+    @FXML
+    private Label authorLabel;
+    @FXML
+    private Label ISBNLabel;
+    @FXML
+    private Label genreLabel;
+    @FXML
+    private Button bookEditYes;
+    @FXML
+    private Button bookEditNo;
+    @FXML
+    private Label editErrorLabel;
+    @FXML
+    private TextField ISBNToEdit;
+    @FXML
+    private TextField bookNameToEdit;
 
-    private static ArrayList<String> bookDetails = new ArrayList<String>();
+    private static ArrayList<String> bookDetails = new ArrayList<>();
     private static File bookDetailsFile = new File(System.getProperty("user.dir") + "\\src\\main\\csvFiles\\com.comapny.loginpagejavafx\\bookDetails.csv");
 
     public void signOut(ActionEvent event) {
@@ -82,5 +99,9 @@ public class libraryController {
 
     public void addBookItems(String[] readableBookDetails) {
         bookSearch.addBookItems(readableBookDetails, bookTable);
+    }
+
+    public void bookToEditCheck(ActionEvent event) {
+        new bookEdit().checkISBNBookName(readFile(), bookNameToEdit, ISBNToEdit, editErrorLabel, bookEditNo, bookEditYes, genreLabel, ISBNLabel, authorLabel, bookNameLabel, bookEditCheckLabel);
     }
 }

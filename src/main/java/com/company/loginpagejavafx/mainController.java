@@ -33,7 +33,7 @@ public class mainController {
     private PasswordField passwordInput;
     @FXML
     private TextField passwordShownInput;
-    public int count;
+    public boolean clicked = false;
 
     public void selectNewScene(String fileName, ActionEvent event) {
         try {
@@ -65,41 +65,12 @@ public class mainController {
 
     //Method to change a password field's visibility
     public void showHidePass(ActionEvent event) {
-        String passwordText;
-        count += 1;
-        if (count % 2 == 1) {
-            passwordText = passwordInput.getText();
-            passwordShownInput.setText(passwordText);
-            passwordShownInput.setVisible(true);
-            passwordInput.setVisible(false);
-        } else {
-            passwordText = passwordShownInput.getText();
-            passwordInput.setText(passwordText);
-            passwordInput.setVisible(true);
-            passwordShownInput.setVisible(false);
-        }
+        clicked = new logIn().showHidePass(passwordInput, passwordShownInput, clicked);
     }
 
     //Method to check login details
     public void loginCheck(ActionEvent event) {
-        String[] userLogins = readFile();
-        boolean loginCorrect = false;
-        if (userLogins.length > 0) {
-            for (int i = 0; i < userLogins.length; i++) {
-                if (userLogins[i].equals(usernameInput.getText()) && (userLogins[i + 1].equals(passwordInput.getText()) || userLogins[i + 1].equals(passwordShownInput.getText()))) {
-                    loginCorrect = true;
-                    break;
-                }
-                i += 1;
-            }
-            if (loginCorrect) {
-                successPage(event);
-            } else {
-                errorText.setText("Username and/or password incorrect!");
-                errorText.setTranslateX(-46.0);
-                errorText.setVisible(true);
-            }
-        }
+        new logIn().loginCheck(event, usernameInput, passwordInput, passwordShownInput, errorText);
     }
 
     //Method to read files
@@ -131,58 +102,17 @@ public class mainController {
     }
 
     public void signUpCheck(String[] userLogins, ActionEvent event) {
-        boolean signUpCorrect = false;
-        for (int i = 0; i < userLogins.length; i++) {
-            if (userLogins[i].equals(usernameInput.getText())) {
-                signUpCorrect = true;
-                break;
-            }
-            i += 1;
-        }
-        if (signUpCorrect) {
-            errorText.setText("A user with this username already exists");
-            errorText.setTranslateX(-50.0);
-            errorText.setVisible(true);
-        } else {
-            if (usernameInput.getText().length() < 3) {
-                errorText.setTranslateX(5.0);
-                errorText.setText("Username too short");
-                errorText.setVisible(true);
-            } else {
-                if (passwordInput.getText().length() < 8 && passwordShownInput.getText().length() < 8) {
-                    errorText.setTranslateX(5.0);
-                    errorText.setText("Password too short");
-                    errorText.setVisible(true);
-                } else {
-                    writeToFile("\\src\\main\\csvFiles\\com.comapny.loginpagejavafx\\userLogins.csv", "users", new ArrayList<>(), true, passwordShownInput, passwordInput, usernameInput, errorText, new Label());
-                    backToChoose(event);
-                }
-            }
-        }
+        signUp.signUpCheck(userLogins, event, usernameInput, errorText, passwordInput, passwordShownInput);
     }
 
     public static void writeToFile(String fileSource, String fileToEdit, ArrayList<String> bookDetails, boolean append, TextField passwordShownInput, PasswordField passwordInput, TextField usernameInput, Label errorText, Label errorLabel) {
         try {
             FileWriter myWriter = new FileWriter(System.getProperty("user.dir") + fileSource, append);
             if (fileToEdit.equals("users")) {
-                addUserDetails(myWriter, passwordShownInput, passwordInput, usernameInput, errorText);
+                signUp.addUserDetails(myWriter, passwordShownInput, passwordInput, usernameInput, errorText);
             } else if (fileToEdit.equals("books")) {
                 bookWrite(myWriter, bookDetails, errorLabel);
             }
-        } catch (IOException e) {
-            errorText.setText("An error occurred!");
-            errorText.setVisible(true);
-        }
-    }
-
-    public static void addUserDetails(FileWriter myWriter, TextField passwordShownInput, PasswordField passwordInput, TextField usernameInput, Label errorText) {
-        try {
-            if (passwordShownInput.getText().length() >= 8) {
-                myWriter.write(usernameInput.getText() + "," + passwordInput.getText() + ",");
-            } else if (passwordInput.getText().length() >= 8) {
-                myWriter.write(usernameInput.getText() + "," + passwordShownInput.getText() + ",");
-            }
-            myWriter.close();
         } catch (IOException e) {
             errorText.setText("An error occurred!");
             errorText.setVisible(true);
