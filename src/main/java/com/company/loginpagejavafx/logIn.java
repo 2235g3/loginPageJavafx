@@ -32,11 +32,11 @@ public class logIn {
 
     //Method to check login details
     public void loginCheck(ActionEvent event, TextField usernameInput, PasswordField passwordInput, TextField passwordShownInput, Label errorText) {
-        String[] userLogins = new mainController().readFile();
+        userLogins[] userLoginsArr = new mainController().readFile();
         boolean loginCorrect = false;
-        if (userLogins.length > 0) {
-            for (int i = 0; i < userLogins.length; i++) {
-                if (userLogins[i].equals(usernameInput.getText()) && (userLogins[i + 1].equals(passwordInput.getText()) || userLogins[i + 1].equals(passwordShownInput.getText()))) {
+        if (userLoginsArr.length > 0) {
+            for (int i = 0; i < userLoginsArr.length; i++) {
+                if (userLoginsArr[i].getUsername().equals(usernameInput.getText()) && (userLoginsArr[i].getPassword().equals(passwordInput.getText()) || userLoginsArr[i].getPassword().equals(passwordShownInput.getText()))) {
                     loginCorrect = true;
                     break;
                 }

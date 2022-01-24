@@ -43,6 +43,7 @@ public class mainController {
             stage.setScene(newScene);
             stage.show();
         } catch (Exception e) {
+            System.out.println(e);
             System.out.println("An Error Occurred!");
         }
     }
@@ -60,7 +61,7 @@ public class mainController {
     }
 
     public void successPage(ActionEvent event) {
-        selectNewScene("successPage.FXML", event);
+        selectNewScene("libraryInterface.fxml", event);
     }
 
     //Method to change a password field's visibility
@@ -74,7 +75,7 @@ public class mainController {
     }
 
     //Method to read files
-    public String[] readFile() {
+    public userLogins[] readFile() {
         try {
             String[] userLogins = new String[0];
             Scanner fileInput = new Scanner(userDetails);
@@ -87,25 +88,36 @@ public class mainController {
             for (String currVal : userDetailsArr) {
                 userLogins = currVal.split(",");
             }
-            return userLogins;
+            return makeUserObjArr(userLogins);
         } catch (IOException e) {
             errorText.setText("An error occurred!");
             errorText.setVisible(true);
-            return new String[]{""};
+            return new userLogins[] {};
         }
+    }
+
+    public static userLogins[] makeUserObjArr(String[] userLoginsArr) {
+        userLogins[] userLoginsObjArr = new userLogins[userLoginsArr.length / 2];
+        int objArrIndex = 0;
+        for (int i = 0; i < userLoginsArr.length; i+=2) {
+            userLogins tempUserLogin = new userLogins(userLoginsArr[i], userLoginsArr[i + 1]);
+            userLoginsObjArr[objArrIndex] = tempUserLogin;
+            objArrIndex++;
+        }
+        return userLoginsObjArr;
     }
 
     // Sign up method
     public void signUp(ActionEvent event) {
-        String[] userLogins = readFile();
+        userLogins[] userLogins = readFile();
         signUpCheck(userLogins, event);
     }
 
-    public void signUpCheck(String[] userLogins, ActionEvent event) {
+    public void signUpCheck(userLogins[] userLogins, ActionEvent event) {
         signUp.signUpCheck(userLogins, event, usernameInput, errorText, passwordInput, passwordShownInput);
     }
 
-    public static void writeToFile(String fileSource, String fileToEdit, ArrayList<String> bookDetails, boolean append, TextField passwordShownInput, PasswordField passwordInput, TextField usernameInput, Label errorText, Label errorLabel) {
+    public static void writeToFile(String fileSource, String fileToEdit, ArrayList<book> bookDetails, boolean append, TextField passwordShownInput, PasswordField passwordInput, TextField usernameInput, Label errorText, Label errorLabel) {
         try {
             FileWriter myWriter = new FileWriter(System.getProperty("user.dir") + fileSource, append);
             if (fileToEdit.equals("users")) {
@@ -119,10 +131,10 @@ public class mainController {
         }
     }
 
-    public static void bookWrite(FileWriter myWriter, ArrayList<String> bookDetails, Label displayError) {
+    public static void bookWrite(FileWriter myWriter, ArrayList<book> bookDetails, Label displayError) {
         try {
-            for (String detail : bookDetails) {
-                myWriter.write(detail + ",");
+            for (book tempBookObj : bookDetails) {
+                myWriter.write(tempBookObj.bookName + "," + tempBookObj.author + "," + tempBookObj.ISBN + "," + tempBookObj.genre);
             }
             myWriter.close();
         } catch (IOException e) {

@@ -14,7 +14,7 @@ import java.util.Map;
 
 public class bookSearch {
     public static void bookSearch(TextField bookSearchBar, TableView bookTable, ChoiceBox filterChoice) {
-        String[] readableBookDetails = libraryController.readFile();
+        book[] readableBookDetails = libraryController.readFile();
         String searchIn = bookSearchBar.getText();
         if (searchIn.length() == 0) {
             bookTable.getItems().clear();
@@ -37,37 +37,25 @@ public class bookSearch {
         return -2;
     }
 
-    public static ArrayList<Integer> indexCheck(String[] readableBookDetails, TextField bookSearchBar, int indexAdd) {
-        int incrementVal;
-        if (indexAdd == 4) {
-            indexAdd = 0;
-            incrementVal = 1;
-        }
-        else {
-            incrementVal = 4;
-        }
+    public static ArrayList<Integer> indexCheck(book[] readableBookDetails, TextField bookSearchBar, int indexAdd) {
         String searchIn = bookSearchBar.getText();
         ArrayList<Integer> itemIndexes = new ArrayList<>();
-        int beginItemIndex;
-        for (int i = indexAdd; i < readableBookDetails.length; i+=incrementVal) {
-            if (readableBookDetails[i].equalsIgnoreCase(searchIn) || readableBookDetails[i].toUpperCase().contains(searchIn.toUpperCase())) {
-                beginItemIndex = i - (i % 4);
-                if (!itemIndexes.contains(beginItemIndex)) {
-                    itemIndexes.add(beginItemIndex);
-                }
+        for (int i = indexAdd; i < readableBookDetails.length; i++) {
+            if (readableBookDetails[i].bookName.equalsIgnoreCase(searchIn) || readableBookDetails[i].author.equalsIgnoreCase(searchIn) || readableBookDetails[i].ISBN.equalsIgnoreCase(searchIn) || readableBookDetails[i].genre.equalsIgnoreCase(searchIn)) {
+                itemIndexes.add(i);
             }
         }
         return itemIndexes;
     }
 
-    public static void displaySearchResults(ArrayList<Integer> itemIndexes, String[] readableBookDetails, TableView bookTable) {
+    public static void displaySearchResults(ArrayList<Integer> itemIndexes, book[] readableBookDetails, TableView bookTable) {
         ObservableList<Map<String, Object>> itemsToAdd = FXCollections.<Map<String, Object>>observableArrayList();
         for (int i : itemIndexes) {
             Map<String, Object> rowItems = new HashMap<>();
-            rowItems.put("BN", readableBookDetails[i]);
-            rowItems.put("A", readableBookDetails[i + 1]);
-            rowItems.put("I", readableBookDetails[i + 2]);
-            rowItems.put("G", readableBookDetails[i + 3]);
+            rowItems.put("BN", readableBookDetails[i].bookName);
+            rowItems.put("A", readableBookDetails[i].author);
+            rowItems.put("I", readableBookDetails[i].ISBN);
+            rowItems.put("G", readableBookDetails[i].genre);
             itemsToAdd.add(rowItems);
         }
         bookTable.getItems().setAll(itemsToAdd);
@@ -95,14 +83,14 @@ public class bookSearch {
         genreColumn.prefWidthProperty().bind(bookTable.widthProperty().multiply(0.2));
     }
 
-    public static void addBookItems(String[] readableBookDetails, TableView bookTable) {
+    public static void addBookItems(book[] readableBookDetails, TableView bookTable) {
         ObservableList<Map<String, Object>> itemsToAdd = FXCollections.<Map<String, Object>>observableArrayList();
-        for (int i = 0; i < readableBookDetails.length; i+=4) {
+        for (int i = 0; i < readableBookDetails.length; i++) {
             Map<String, Object> rowItems = new HashMap<>();
-            rowItems.put("BN", readableBookDetails[i]);
-            rowItems.put("A", readableBookDetails[i + 1]);
-            rowItems.put("I", readableBookDetails[i + 2]);
-            rowItems.put("G", readableBookDetails[i + 3]);
+            rowItems.put("BN", readableBookDetails[i].bookName);
+            rowItems.put("A", readableBookDetails[i].author);
+            rowItems.put("I", readableBookDetails[i].ISBN);
+            rowItems.put("G", readableBookDetails[i].genre);
             itemsToAdd.add(rowItems);
         }
         bookTable.getItems().addAll(itemsToAdd);

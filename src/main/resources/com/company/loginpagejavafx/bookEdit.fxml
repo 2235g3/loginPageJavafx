@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.loginpagejavafx.bookEditController">
+   <children>
+      <Label layoutX="239.0" layoutY="23.0" text="Edit A Book" underline="true">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="149.0" layoutY="88.0" text="Book Name:" />
+      <TextField fx:id="bookNameIn" layoutX="234.0" layoutY="84.0" promptText="Book Name" />
+      <Label layoutX="149.0" layoutY="135.0" text="Author:" />
+      <TextField fx:id="authorIn" layoutX="234.0" layoutY="131.0" promptText="Author" />
+      <Label layoutX="149.0" layoutY="183.0" text="ISBN:" />
+      <TextField fx:id="ISBNIn" layoutX="234.0" layoutY="179.0" promptText="ISBN" />
+      <Label layoutX="149.0" layoutY="228.0" text="Genre:" />
+      <TextField fx:id="genreIn" layoutX="234.0" layoutY="224.0" promptText="Genre" />
+      <Button layoutX="514.0" layoutY="30.0" mnemonicParsing="false" onAction="#signOut" text="Sign Out" />
+      <Button onAction="#editBook" layoutX="275.0" layoutY="298.0" mnemonicParsing="false" text="Edit Book" />
+      <Label fx:id="errorLabel" layoutX="200.0" layoutY="262.0" prefHeight="17.0" prefWidth="209.0" textFill="RED" visible="false" />
+      <Button layoutX="29.0" layoutY="27.0" mnemonicParsing="false" onAction="#back" text="Back" />
+   </children>
+</AnchorPane>

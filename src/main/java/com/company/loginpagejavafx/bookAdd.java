@@ -8,8 +8,11 @@ import java.util.ArrayList;
 
 public class bookAdd {
     public static void addBook(TextField bookNameIn, TextField authorIn, TextField ISBNIn, TextField genreIn, Label errorLabel) {
-        ArrayList<String> newBookDetails = new ArrayList<>();
-        String[] readableBookDetails = libraryController.readFile();
+        book[] readableBookDetails = libraryController.readFile();
+        ArrayList<book> books = new ArrayList<>();
+        for (book tempBookObj : readableBookDetails) {
+            books.add(tempBookObj);
+        }
         if (bookNameIn.getText().equals("") || authorIn.getText().equals("") || genreIn.getText().equals("")) {
             displayError(errorLabel, "One or more values are empty", 14.0, true);
         }
@@ -22,14 +25,9 @@ public class bookAdd {
                 if (bookExists) {
                     displayError(errorLabel, "Book is already in system!", 25.0, true);
                 } else {
-                    for (String detail : readableBookDetails) {
-                        newBookDetails.add(detail);
-                    }
-                    newBookDetails.add(bookNameIn.getText());
-                    newBookDetails.add(authorIn.getText());
-                    newBookDetails.add(ISBNIn.getText());
-                    newBookDetails.add(genreIn.getText());
-                    mainController.writeToFile("\\src\\main\\csvFiles\\com.comapny.loginpagejavafx\\bookDetails.csv", "books", newBookDetails, false, new TextField(), new PasswordField(), new TextField(), new Label(), errorLabel);
+                    book newBook = new book(bookNameIn.getText(), authorIn.getText(), ISBNIn.getText(), genreIn.getText());
+                    books.add(newBook);
+                    mainController.writeToFile("\\src\\main\\csvFiles\\com.comapny.loginpagejavafx\\bookDetails.csv", "books", books, false, new TextField(), new PasswordField(), new TextField(), new Label(), errorLabel);
                     displayError(errorLabel, "Book was added to system!",0.0, true);
                     bookNameIn.setText("");
                     authorIn.setText("");
@@ -40,10 +38,10 @@ public class bookAdd {
         }
     }
 
-    public static boolean checkExisting(TextField bookNameIn, TextField authorIn, TextField ISBNIn, String[] readableBookDetails) {
+    public static boolean checkExisting(TextField bookNameIn, TextField authorIn, TextField ISBNIn, book[] readableBookDetails) {
         boolean bookExists = false;
-        for (int i = 0; i < readableBookDetails.length; i += 4) {
-            if ((bookNameIn.getText().equalsIgnoreCase(readableBookDetails[i]) && authorIn.getText().equalsIgnoreCase(readableBookDetails[i + 1])) || ISBNIn.getText().equals(readableBookDetails[i + 2])) {
+        for (int i = 0; i < readableBookDetails.length; i++) {
+            if ((bookNameIn.getText().equalsIgnoreCase(readableBookDetails[i].bookName) && authorIn.getText().equalsIgnoreCase(readableBookDetails[i].author)) || ISBNIn.getText().equals(readableBookDetails[i].ISBN)) {
                 bookExists = true;
                 break;
             }

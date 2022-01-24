@@ -24,10 +24,10 @@ public class signUp {
         }
     }
 
-    public static void signUpCheck(String[] userLogins, ActionEvent event, TextField usernameInput, Label errorText, PasswordField passwordInput, TextField passwordShownInput) {
+    public static void signUpCheck(userLogins[] userLoginsArr, ActionEvent event, TextField usernameInput, Label errorText, PasswordField passwordInput, TextField passwordShownInput) {
         boolean signUpCorrect = false;
-        for (int i = 0; i < userLogins.length; i+=1) {
-            if (userLogins[i].equals(usernameInput.getText())) {
+        for (int i = 0; i < userLoginsArr.length; i+=1) {
+            if (userLoginsArr[i].getUsername().equals(usernameInput.getText())) {
                 signUpCorrect = true;
                 break;
             }

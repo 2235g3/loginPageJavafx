@@ -23,5 +23,10 @@
          </font>
       </Label>
       <Label fx:id="errorText" layoutX="150.0" layoutY="194.0" text="An error occurred!" textFill="RED" visible="false" />
+      <Label layoutX="173.0" layoutY="14.0" text="Login" underline="true">
+         <font>
+            <Font name="System Bold" size="22.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
