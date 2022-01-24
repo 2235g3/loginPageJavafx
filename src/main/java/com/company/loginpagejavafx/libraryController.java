@@ -146,7 +146,7 @@ public class libraryController {
             FXMLLoader sceneLoader = new FXMLLoader(getClass().getResource(fileName));
             root = sceneLoader.load();
             bookEditController bookEditController = sceneLoader.getController();
-            bookEditController.initialize(bookName, author, ISBN, genre);
+            bookEditController.setBaseValues(bookName, author, ISBN, genre);
             stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             newScene = new Scene(root);
             stage.setScene(newScene);

@@ -12,13 +12,13 @@
          </font>
       </Label>
       <Label layoutX="149.0" layoutY="88.0" text="Book Name:" />
-      <TextField fx:id="bookNameIn" layoutX="234.0" layoutY="84.0" promptText="Book Name" />
+      <TextField fx:id="bookNameInput" layoutX="234.0" layoutY="84.0" promptText="Book Name" />
       <Label layoutX="149.0" layoutY="135.0" text="Author:" />
-      <TextField fx:id="authorIn" layoutX="234.0" layoutY="131.0" promptText="Author" />
+      <TextField fx:id="authorInput" layoutX="234.0" layoutY="131.0" promptText="Author" />
       <Label layoutX="149.0" layoutY="183.0" text="ISBN:" />
-      <TextField fx:id="ISBNIn" layoutX="234.0" layoutY="179.0" promptText="ISBN" />
+      <TextField fx:id="ISBNInput" layoutX="234.0" layoutY="179.0" promptText="ISBN" />
       <Label layoutX="149.0" layoutY="228.0" text="Genre:" />
-      <TextField fx:id="genreIn" layoutX="234.0" layoutY="224.0" promptText="Genre" />
+      <TextField fx:id="genreInput" layoutX="234.0" layoutY="224.0" promptText="Genre" />
       <Button layoutX="514.0" layoutY="30.0" mnemonicParsing="false" onAction="#signOut" text="Sign Out" />
       <Button onAction="#editBook" layoutX="275.0" layoutY="298.0" mnemonicParsing="false" text="Edit Book" />
       <Label fx:id="errorLabel" layoutX="200.0" layoutY="262.0" prefHeight="17.0" prefWidth="209.0" textFill="RED" visible="false" />

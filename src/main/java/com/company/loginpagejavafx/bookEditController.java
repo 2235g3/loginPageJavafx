@@ -8,16 +8,20 @@ import javafx.scene.control.Label;
 
 public class bookEditController {
     @FXML
-    private TextField bookNameIn;
+    private TextField bookNameInput;
     @FXML
-    private TextField authorIn;
+    private TextField authorInput;
     @FXML
-    private TextField ISBNIn;
+    private TextField ISBNInput;
     @FXML
-    private TextField genreIn;
+    private TextField genreInput;
     @FXML
     private Label errorLabel;
     private String ogISBN;
+    private String bookName;
+    private String author;
+    private String ISBN;
+    private String genre;
 
     public void back(ActionEvent event) {
         new mainController().selectNewScene("libraryInterface.FXML", event);
@@ -28,14 +32,21 @@ public class bookEditController {
     }
 
     public void editBook(ActionEvent event) {
-        new bookEdit().checkISBNBookName(libraryController.readFile(), bookNameIn, authorIn, ISBNIn, genreIn, errorLabel, new Button(), new Button(), new Label(), new Label(), new Label(), new Label(), new Label(), false, ogISBN, event);
+        new bookEdit().checkISBNBookName(libraryController.readFile(), bookNameInput, authorInput, ISBNInput, genreInput, errorLabel, new Button(), new Button(), new Label(), new Label(), new Label(), new Label(), new Label(), false, ogISBN, event);
     }
 
-    public void initialize(String bookName, String author, String ISBN, String genre) {
-        bookNameIn.setText(bookName);
-        authorIn.setText(author);
-        ISBNIn.setText(ISBN);
-        genreIn.setText(genre);
+    public void setBaseValues(String bookNameInStr, String authorInStr, String ISBNInStr, String genreInStr) {
+        bookName = bookNameInStr;
+        author = authorInStr;
+        ISBN = ISBNInStr;
+        genre = genreInStr;
+    }
+
+    public void initialize() {
+        bookNameInput.setText(bookName);
+        authorInput.setText(author);
+        ISBNInput.setText(ISBN);
+        genreInput.setText(genre);
         ogISBN = ISBN;
     }
 }
